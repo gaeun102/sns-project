@@ -1,9 +1,10 @@
-import { AiOutlineCompass,AiOutlineSearch,AiFillCompass, AiFillHome, AiFillMessage, AiFillPlusCircle, AiOutlineHeart, AiOutlineHome, AiOutlineMessage, AiOutlinePlusCircle } from "react-icons/ai"
+import { AiFillHeart,AiOutlineCompass,AiOutlineSearch,AiFillCompass, AiFillHome, AiFillMessage, AiFillPlusCircle, AiOutlineHeart, AiOutlineHome, AiOutlineMessage, AiOutlinePlusCircle } from "react-icons/ai"
 import {RiVideoFill,RiVideoLine} from "react-icons/ri"
 import {CgProfile} from "react-icons/cg"
 
 export const mainu=[
-    {title:"Home",icon:<AiOutlineHome className="text-2xl mr-5"></AiOutlineHome>, ativeIcon:<AiFillHome className="text-2xl mr-5"></AiFillHome>},
+    {title:"Home",icon:<AiOutlineHome className="text-2xl mr-5"></AiOutlineHome>, ativeIcon:<AiFillHome className="text-2xl mr-5"></AiFillHome>
+    },
     {
         title:"Search", icon:<AiOutlineSearch className="text-2xl mr-5"></AiOutlineSearch>, activeIcon:<AiOutlineSearch className="text-2xl mr-5"></AiOutlineSearch>
     },
@@ -21,7 +22,7 @@ export const mainu=[
     {
         title:"Notification",
         icon:<AiOutlineHeart className="text-2xl mr-5"></AiOutlineHeart>,
-        activeIcon:<AiOutlineHeart className="text-2xl mr-5"></AiOutlineHeart>
+        activeIcon:<AiFillHeart className="text-2xl mr-5"></AiFillHeart>
     },
     {
         title:"Create",
