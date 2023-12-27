@@ -16,7 +16,7 @@ const Router = () => {
           </Routes>
         </div>
       </div>
-    </div>sdsd
+    </div>
   )
 }
 
