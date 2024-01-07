@@ -10,22 +10,28 @@ import { FaRegComment } from 'react-icons/fa';
 import { RiSendPlaneLine } from 'react-icons/ri';
 import './PostCard.css';
 import CommentModal from '../Comment/CommentModal';
+import { useDisclosure } from '@chakra-ui/react';
 
 const PostCard = () => {
   const [showDropDown, setShowDropDown] = useState(false);
   const [isPostLiked, setIsPostLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleSavePost = () => {
     setIsSaved(!isSaved);
   };
 
-  const hadlePostLike = () => {
+  const handlePostLike = () => {
     setIsPostLiked(!isPostLiked);
   };
 
   const handleClick = () => {
     setShowDropDown(!showDropDown);
+  };
+
+  const handleOpenCommentModal = () => {
+    onOpen(!onClose);
   };
   return (
     <div>
@@ -66,16 +72,19 @@ const PostCard = () => {
           <div className='flex item-center space-x-2'>
             {isPostLiked ? (
               <AiFillHeart
-                onClick={hadlePostLike}
+                onClick={handlePostLike}
                 className='text-xl hover:opacity-50 cursor-pointer text-red-500'
               />
             ) : (
               <AiOutlineHeart
-                onClick={hadlePostLike}
+                onClick={handlePostLike}
                 className='text-2xl hover:opacity-50 cursor-pointer'
               />
             )}
-            <FaRegComment className='text-xl hover:opacity-50 cursor-pointer ' />
+            <FaRegComment
+              onClick={handleOpenCommentModal}
+              className='text-xl hover:opacity-50 cursor-pointer '
+            />
             <RiSendPlaneLine className='text-xl hover:opacity-50 cursor-pointer' />
           </div>
 
@@ -108,7 +117,14 @@ const PostCard = () => {
         </div>
       </div>
 
-      <CommentModal />
+      <CommentModal
+        hadlePostLike={handlePostLike}
+        onClose={onClose}
+        isOpen={isOpen}
+        handleSavePost={handleSavePost}
+        isPostLiked={isPostLiked}
+        isSaved={isSaved}
+      />
     </div>
   );
 };
