@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
-import { AiFillAlert, AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import { BsBookmark, BsBookmarkFill, BsThreeDots } from 'react-icons/bs';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import {
+  BsBookmark,
+  BsBookmarkFill,
+  BsEmojiSmile,
+  BsThreeDots,
+} from 'react-icons/bs';
 import { FaRegComment } from 'react-icons/fa';
 import { RiSendPlaneLine } from 'react-icons/ri';
 import './PostCard.css';
+import CommentModal from '../Comment/CommentModal';
 
 const PostCard = () => {
   const [showDropDown, setShowDropDown] = useState(false);
@@ -11,7 +17,7 @@ const PostCard = () => {
   const [isSaved, setIsSaved] = useState(false);
 
   const handleSavePost = () => {
-    isSaved(!setIsSaved);
+    setIsSaved(!isSaved);
   };
 
   const hadlePostLike = () => {
@@ -56,7 +62,6 @@ const PostCard = () => {
             alt=''
           />
         </div>
-
         <div className='flex justify-between items-center w-full px-5 py-4'>
           <div className='flex item-center space-x-2'>
             {isPostLiked ? (
@@ -67,7 +72,7 @@ const PostCard = () => {
             ) : (
               <AiOutlineHeart
                 onClick={hadlePostLike}
-                className='text-xl hover:opacity-50 cursor-pointer'
+                className='text-2xl hover:opacity-50 cursor-pointer'
               />
             )}
             <FaRegComment className='text-xl hover:opacity-50 cursor-pointer ' />
@@ -76,13 +81,34 @@ const PostCard = () => {
 
           <div className='cursor-pointer'>
             {isSaved ? (
-              <BsBookmarkFill className='text-xl hover:opacity-50 cursor-pointer' />
+              <BsBookmarkFill
+                onClick={handleSavePost}
+                className='text-2xl hover:opacity-50 cursor-pointer'
+              />
             ) : (
               <BsBookmark className='text-xl hover:opacity-50 cursor-pointer' />
             )}
           </div>
         </div>
+
+        <div className='w-full py-2 px-5'>
+          <p>10likes</p>
+          <p className='opacity-50 py-2'>view all 10 comments</p>
+        </div>
+
+        <div className='border border-t w-full'>
+          <div className='flex w-full items-center px-5'>
+            <BsEmojiSmile />
+            <input
+              className='commentInput'
+              type='text'
+              placeholder='Add a comment...'
+            />
+          </div>
+        </div>
       </div>
+
+      <CommentModal />
     </div>
   );
 };
