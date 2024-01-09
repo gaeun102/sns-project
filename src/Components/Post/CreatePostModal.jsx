@@ -10,10 +10,13 @@ import {
 import React, { useState } from 'react';
 import { FaPhotoVideo } from 'react-icons/fa';
 import './CreatePostModal.css';
+import { GrEmoji } from 'react-icons/gr';
+import { GoLocation } from 'react-icons/go';
 
 const CreatePostModal = ({ onClose, isOpen }) => {
   const [isDragOver, setIsDragOver] = useState(false);
   const [file, setFile] = useState(false);
+  const [caption, setCaption] = useState();
 
   const handleDrop = (event) => {
     event.preventDefault();
@@ -51,9 +54,13 @@ const CreatePostModal = ({ onClose, isOpen }) => {
     }
   };
 
+  const handleCaptiononChange = (e) => {
+    setCaption(e.target.value);
+  };
+
   return (
     <div>
-      <Modal size={'4xl'} onClose={onClose} isOpen={true} isCentered>
+      <Modal size={'4xl'} onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
         <ModalContent>
           <div className='flex justify-between py-1 px-10 items-center'>
@@ -70,8 +77,8 @@ const CreatePostModal = ({ onClose, isOpen }) => {
           <hr />
 
           <ModalBody>
-            <div>
-              <div className=''>
+            <div className='h-[70vh] justify-between pb-5 flex'>
+              <div className='w-[50%]'>
                 {!file && (
                   <div
                     onDrop={handleDrop}
@@ -97,7 +104,53 @@ const CreatePostModal = ({ onClose, isOpen }) => {
                   </div>
                 )}
 
-                {file && <img src={URL.createObjectURL(file)} alt='' />}
+                {file && (
+                  <img
+                    className='max-h-full'
+                    src={URL.createObjectURL(file)}
+                    alt=''
+                  />
+                )}
+              </div>
+              <div className='w-[1px] border h-full'></div>
+
+              <div className='w-[50%]'>
+                <div className='flex items-center px-2'>
+                  <img
+                    className='w-7 h-7 rounded-full'
+                    src='https://cdn.pixabay.com/photo/2023/07/02/18/49/cup-8102791_640.jpg'
+                    alt=''
+                  />
+                  <p className='font-semibold ml-4'>username</p>
+                </div>
+
+                <div className='px-2'>
+                  <textarea
+                    placeholder='Write a caption'
+                    className='captionInput'
+                    name='caption'
+                    rows='8'
+                    onChange={handleCaptiononChange}
+                  ></textarea>
+                </div>
+
+                <div className='flex justify-between px-2'>
+                  <GrEmoji />
+                  <p className='opacity-70'>{caption?.length} /2,200</p>
+                </div>
+
+                <hr />
+
+                <div className='p-2 flex justify-between items-center'>
+                  <input
+                    className='locationInput'
+                    type='text'
+                    placeholder='location'
+                    name='location'
+                  />
+                  <GoLocation />
+                </div>
+                <hr />
               </div>
             </div>
           </ModalBody>
