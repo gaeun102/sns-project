@@ -2,7 +2,7 @@ import React from 'react';
 import StoryCircle from '../../Components/Story/StoryCircle';
 import HomeRight from '../../Components/HomeRight/HomeRight';
 import PostCard from '../../Components/Post/PostCard';
-import CreatePostModal from '../../Components/Post/CreatePostModal';
+
 import { useDisclosure } from '@chakra-ui/react';
 
 export const HomePage = () => {
@@ -23,7 +23,7 @@ export const HomePage = () => {
             ))}
           </div>
         </div>
-        <div className='w-[35%]'>
+        <div className='w-[27%]'>
           <HomeRight />
         </div>
       </div>

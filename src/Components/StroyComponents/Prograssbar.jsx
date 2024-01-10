@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import './prograssbar.css';
+import './Prograssbar.css';
 
-const Progressbar = (index, activeIndex, duration) => {
+const Prograssbar = (index, activeIndex, duration) => {
   const [prograss, setPrograss] = useState(0);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const Progressbar = (index, activeIndex, duration) => {
   const isActive = index === activeIndex;
 
   return (
-    <div>
+    <div className={`prograss-bar-container ${isActive ? 'active' : ''}`}>
       <div
         className={`${isActive ? 'prograss-bar' : ''}`}
         style={{ width: `${prograss}%` }}
@@ -36,4 +36,4 @@ const Progressbar = (index, activeIndex, duration) => {
   );
 };
 
-export default Progressbar;
+export default Prograssbar;

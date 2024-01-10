@@ -1,0 +1,19 @@
+.prograss-bar-container{
+    width: 100%;
+    height: 4px;
+    background-color: rgb(206,206,206);
+    border-radius: 4px;
+    overflow: hidden;
+    opacity: .5;
+    transition: opacity .3 ease-out;
+    margin: 1rem;
+}
+ .prograss-bar-container .active{
+    opacity: 1;
+}
+
+.prograss-bar{
+    height: 100%;
+    background-color:#2a87c4;
+    border-radius: 4px;
+}

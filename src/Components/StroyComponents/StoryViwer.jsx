@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import Prograssbar from './Prograssbar';
 
 const StoryViewerContainer = styled.div`
   display: flex;
@@ -14,7 +15,7 @@ const StoryImage = styled.img`
   object-fit: contain;
 `;
 
-const StoryViwer = (stories) => {
+const StoryViwer = ({ stories }) => {
   const [curentStoryIndex, setCurentStoryIndex] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -36,9 +37,20 @@ const StoryViwer = (stories) => {
   }, [curentStoryIndex]);
 
   return (
-    <div>
+    <div className='relative w-full'>
       <StoryViewerContainer>
         <StoryImage src={stories?.[curentStoryIndex].image} />
+
+        <div className='absolute top-0 flex w-full'>
+          {stories.map((item, index) => (
+            <Prograssbar
+              activeIndex={activeIndex}
+              key={index}
+              duration={2000}
+              index={index}
+            />
+          ))}
+        </div>
       </StoryViewerContainer>
     </div>
   );
