@@ -95,7 +95,10 @@ const PostCard = () => {
                 className='text-2xl hover:opacity-50 cursor-pointer'
               />
             ) : (
-              <BsBookmark className='text-xl hover:opacity-50 cursor-pointer' />
+              <BsBookmark
+                onClick={handleSavePost}
+                className='text-xl hover:opacity-50 cursor-pointer'
+              />
             )}
           </div>
         </div>

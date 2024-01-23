@@ -1,0 +1,23 @@
+.mobileWallpaper{
+    background-image: url(https://velog.velcdn.com/images/seonghyun015b/post/7788d2c2-7686-4483-aaa6-2cb6fa6b2927/image.png);
+    animation: changege 8s infinite;
+}
+
+@keyframes changege{
+
+    0%{
+        background-image:url(https://velog.velcdn.com/images/seonghyun015b/post/7788d2c2-7686-4483-aaa6-2cb6fa6b2927/image.png) ;
+    }
+
+    25%{
+        background-image:url(https://velog.velcdn.com/images/seonghyun015b/post/7788d2c2-7686-4483-aaa6-2cb6fa6b2927/image.png) ;
+    }
+
+    50%{
+        background-image:url(https://velog.velcdn.com/images/seonghyun015b/post/7788d2c2-7686-4483-aaa6-2cb6fa6b2927/image.png) ;
+    }
+
+    75%{
+        background-image:url(https://velog.velcdn.com/images/seonghyun015b/post/7788d2c2-7686-4483-aaa6-2cb6fa6b2927/image.png) ;
+    }
+}
