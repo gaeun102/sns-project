@@ -1,8 +1,11 @@
 import React from 'react';
 import './Auth.css';
 import Signin from '../../Components/Restar/Signin';
+import { useLocation } from 'react-router-dom';
+import Signup from '../../Components/Restar/Signup';
 
 const Auth = () => {
+  const location = useLocation();
   return (
     <div>
       <div className='flex items-center justify-center h-[100vh] space-x-5'>
@@ -16,8 +19,8 @@ const Auth = () => {
             <div className='mobileWallpaper h-[33rem] w-[15.7rem] absolute top-6 right-14 '></div>
           </div>
         </div>
-        <div className='w-[30vw]'>
-          <Signin />
+        <div className='w-[40vw] w-[30vw]'>
+          {location.pathname === '/login' ? <Signin /> : <Signup />}
         </div>
       </div>
     </div>

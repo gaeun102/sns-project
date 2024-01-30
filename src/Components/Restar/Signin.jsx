@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Button,
@@ -9,6 +9,9 @@ import {
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { signinAction } from '../../Redux/Auth/Action';
+import { getUserProfile } from '../../User/ActionType';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -22,10 +25,26 @@ const validationSchema = Yup.object().shape({
 const Signin = () => {
   const initialValues = { email: '', password: '' };
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useSelector((store) => store);
+  const jwt = localStorage.getItem('token');
 
-  const handleSubmit = (values) => {
-    console.log('values: ', values);
+  const handleSubmit = (values, actions) => {
+    dispatch(signinAction(values));
+    actions.setSubmitting(false);
   };
+
+  useEffect(() => {
+    if (jwt) dispatch(getUserProfile(jwt));
+  }, [jwt]);
+
+  useEffect(() => {
+    if (user.reqUser?.username) {
+      navigate(`/${user.reqUser?.username}`);
+    }
+  }, [jwt, user.reqUser]);
+
+  const handleNavigate = () => navigate('/signup');
   return (
     <div>
       <div className='border'>
@@ -77,12 +96,12 @@ const Signin = () => {
                     </FormControl>
                   )}
                 </Field>
-                <p className='text-center'>
+                <p className='text-center text-sm'>
                   People who user our service may have contact information to
                   Instagram. Learn More...
                 </p>
 
-                <p className='text-center'>
+                <p className='text-center text-sm'>
                   By signing up, you agree to our Terms, Privacy Policy and
                   Cookies Policy.
                 </p>
@@ -104,7 +123,12 @@ const Signin = () => {
       <div className='border w-full border-slate-300 mt-5'>
         <p className='text-center py-2 '>
           If You Don't Have Account{' '}
-          <span className='ml-2 text-blue-700 cursor-pointer'>Sign Up</span>
+          <span
+            onClick={handleNavigate}
+            className='ml-2 text-blue-700 cursor-pointer'
+          >
+            Sign Up
+          </span>
         </p>
       </div>
     </div>
