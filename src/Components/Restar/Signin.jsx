@@ -11,7 +11,7 @@ import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signinAction } from '../../Redux/Auth/Action';
-import { getUserProfile } from '../../User/ActionType';
+import { getUserProfile } from '../../User/Action';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
