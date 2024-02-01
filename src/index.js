@@ -9,6 +9,8 @@ import { Provider } from 'react-redux';
 import { store } from './Redux/Store/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const cors = require("cors");
+
 root.render(
   <React.StrictMode>
   <BrowserRouter>

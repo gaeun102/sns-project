@@ -37,7 +37,7 @@ const Signup = () => {
   const handleSubmit = (values, actions) => {
     console.log('values: ', values);
     dispatch(signupAction(values));
-    actions.setisSubmitting(false);
+    actions.setSubmitting(false);
   };
 
   useEffect(() => {

@@ -1,10 +1,10 @@
 import { SIGN_IN,SIGN_UP } from "./ActionType";
 
-export const signinAction=(data)=>async(dispath)=>{
+export const signinAction=(data)=>async(dispatch)=>{
 
     try{
 
-        const res=await fetch("http://localhost:3000/signin",{
+        const res=await fetch("http://localhost:5454/signin",{
             method:"GET",
             headers:{
                 "Content-Type":"application/json",
@@ -13,7 +13,7 @@ export const signinAction=(data)=>async(dispath)=>{
         })
         const token=res.headers.get("Authorization");
         localStorage.setItem("token",token);
-        dispath({type:SIGN_IN, payload:token});
+        dispatch({type:SIGN_IN, payload:token});
 
         console.log("signin user :", token)
 
@@ -24,21 +24,20 @@ export const signinAction=(data)=>async(dispath)=>{
     }
 
 
-    export  const signupAction=(data)=>async(dispath)=>{
+    export  const signupAction=(data)=>async(dispatch)=>{
 
         try{
     
-            const res=await fetch("http://localhost:3001/signup",{
+            const res=await fetch("http://localhost:5454/signup",{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json", 
                 },
-                body:JSON.stringify(data)
             })
             const user=await res.json();
             console.log("signup user :", user)
           
-            dispath({type:SIGN_UP, payload:user});
+            dispatch({type:SIGN_UP, payload:user});
         }catch(error){
             console.log(error)
         }
