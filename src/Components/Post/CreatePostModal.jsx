@@ -12,11 +12,18 @@ import { FaPhotoVideo } from 'react-icons/fa';
 import './CreatePostModal.css';
 import { GrEmoji } from 'react-icons/gr';
 import { GoLocation } from 'react-icons/go';
+import { useDispatch } from 'react-redux';
+import { uploadToCloudnary } from '../../Config/UploadToCloudnary';
+import { createPostAction } from '../../Redux/Post/Action';
 
 const CreatePostModal = ({ onClose, isOpen }) => {
   const [isDragOver, setIsDragOver] = useState(false);
   const [file, setFile] = useState(false);
   const [caption, setCaption] = useState();
+  const dispatch = useDispatch();
+  const [imageUrl, setImageUrl] = useState('');
+  const [location, setLocation] = useState('');
+  const token = localStorage.getItem('token');
 
   const handleDrop = (event) => {
     event.preventDefault();
@@ -39,13 +46,16 @@ const CreatePostModal = ({ onClose, isOpen }) => {
     setIsDragOver(false);
   };
 
-  const handleOnChange = (e) => {
+  const handleOnChange = async (e) => {
     const file = e.target.files[0];
 
-    if (
-      file &&
-      (file.type.startsWith('image/') || file.type.startsWith('video/'))
-    ) {
+    if (!file) {
+      return; // 파일이 없는 경우 처리하지 않음
+    }
+
+    if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
+      const imgUrl = await uploadToCloudnary(file);
+      setImageUrl(imgUrl);
       setFile(file);
       console.log('file :,', file);
     } else {
@@ -56,6 +66,19 @@ const CreatePostModal = ({ onClose, isOpen }) => {
 
   const handleCaptiononChange = (e) => {
     setCaption(e.target.value);
+  };
+
+  const handleCreatePost = () => {
+    const data = {
+      jwt: token,
+      data: {
+        caption,
+        location,
+        image: imageUrl,
+      },
+    };
+    dispatch(createPostAction(data)); // data를 dispatch에 전달해야 함
+    onClose();
   };
 
   return (
@@ -70,6 +93,7 @@ const CreatePostModal = ({ onClose, isOpen }) => {
               variant={'ghost'}
               size={'sm'}
               colorScheme='blue'
+              onClick={handleCreatePost}
             >
               Share
             </Button>
@@ -143,6 +167,7 @@ const CreatePostModal = ({ onClose, isOpen }) => {
 
                 <div className='p-2 flex justify-between items-center'>
                   <input
+                    onClick={(e) => setLocation(e.target.value)}
                     className='locationInput'
                     type='text'
                     placeholder='location'

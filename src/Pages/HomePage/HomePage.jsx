@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import StoryCircle from '../../Components/Story/StoryCircle';
 import HomeRight from '../../Components/HomeRight/HomeRight';
 import PostCard from '../../Components/Post/PostCard';
 
 import { useDisclosure } from '@chakra-ui/react';
+import { useDispatch } from 'react-redux';
+import { findUserPostAction } from '../../Redux/Post/Action';
 
 export const HomePage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(findUserPostAction);
+  });
   return (
     <div>
       <div className='mt-10 flex w-[100%] justify-center'>
